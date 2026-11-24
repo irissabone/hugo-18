@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felices 18, mi amor ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #d98da5;
+      --dark-pink: #a95773;
+      --light-pink: #f8e5eb;
+      --pale-pink: #fff2f5;
+      --cream: #fffaf7;
+      --text: #59434b;
+      --muted: #987d85;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, #fbe8ed 0, transparent 30%),
+        radial-gradient(circle at 90% 90%, #f9e6eb 0, transparent 30%),
+        var(--cream);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 35px 20px 30px;
+      animation: appear 0.55s ease;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content {
+      width: 100%;
+      max-width: 560px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--dark-pink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(42px, 11vw, 64px);
+      line-height: 1.12;
+      color: var(--dark-pink);
+    }
+
+    h2 {
+      font-size: clamp(31px, 8vw, 43px);
+      color: var(--dark-pink);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      margin: 15px auto 25px;
+      max-width: 390px;
+    }
+
+    .flower {
+      color: var(--pink);
+      font-size: 35px;
+      margin-bottom: 22px;
+    }
+
+    .date {
+      display: inline-block;
+      border: 1px solid #edcbd5;
+      border-radius: 30px;
+      padding: 9px 20px;
+      color: var(--dark-pink);
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-top: 22px;
+      background: rgba(255,255,255,0.55);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 27px;
+      background: var(--pink);
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(169, 87, 115, 0.16);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: var(--dark-pink);
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--dark-pink);
+      border: 1px solid #e8b9c8;
+      box-shadow: none;
+    }
+
+    .button.secondary:hover {
+      background: var(--light-pink);
+    }
+
+    .navigation {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 35px auto 0;
+    }
+
+    .navigation .button {
+      min-width: 125px;
+    }
+
+    .progress {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .progress span {
+      height: 5px;
+      width: 19px;
+      border-radius: 10px;
+      background: #f0d9e0;
+      transition: background 0.3s;
+    }
+
+    .progress span.current {
+      background: var(--pink);
+    }
+
+    .counter-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #f0dce2;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 25px auto;
+      max-width: 310px;
+    }
+
+    .counter-number {
+      font-family: 'Playfair Display', serif;
+      color: var(--dark-pink);
+      font-size: 38px;
+    }
+
+    .counter-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .timeline {
+      text-align: left;
+      margin: 30px auto;
+      max-width: 430px;
+      border-left: 2px solid #e9b9c8;
+      padding-left: 23px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 10px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 4px;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: var(--pink);
+      border: 3px solid var(--cream);
+    }
+
+    .timeline-date {
+      color: var(--dark-pink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item h3 {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin: 28px auto;
+    }
+
+    .photo {
+      background: white;
+      padding: 8px 8px 17px;
+      border-radius: 5px;
+      box-shadow: 0 5px 18px rgba(100, 55, 70, 0.10);
+      transform: rotate(-1deg);
+    }
+
+    .photo:nth-child(even) {
+      transform: rotate(1.5deg);
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1.08;
+      object-fit: cover;
+      background: var(--light-pink);
+    }
+
+    .photo p {
+      font-family: 'Playfair Display', serif;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 9px;
+    }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 26px auto;
+    }
+
+    .reason {
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 13px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid #f1dce3;
+      border-radius: 15px;
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .reason span {
+      color: var(--pink);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+    }
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin: 28px auto;
+    }
+
+    .interest {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid #f1dce3;
+      border-radius: 18px;
+      padding: 23px 12px;
+    }
+
+    .interest .emoji {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .interest h3 {
+      font-size: 19px;
+      color: var(--dark-pink);
+      margin-bottom: 5px;
+    }
+
+    .interest p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .memory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 27px auto;
+      text-align: left;
+    }
+
+    .memory-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid #efd8e0;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .memory-card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 17px;
+      color: var(--dark-pink);
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+    }
+
+    .memory-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .memory-card summary::after {
+      content: "+";
+      float: right;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--pink);
+    }
+
+    .memory-card[open] summary::after {
+      content: "−";
+    }
+
+    .memory-card p {
+      padding: 0 17px 17px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .letter {
+      background: #fff;
+      border: 1px solid #f0dce2;
+      border-radius: 5px;
+      box-shadow: 0 8px 25px rgba(100, 55, 70, 0.08);
+      padding: 28px 23px;
+      margin: 25px auto;
+      text-align: left;
+      min-height: 170px;
+    }
+
+    .letter p {
+      color: var(--text);
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      line-height: 2;
+      white-space: pre-line;
+    }
+
+    .footer {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+      margin-top: 32px;
+    }
+
+    .footer strong {
+      display: block;
+      color: var(--dark-pink);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .small-heart {
+      color: var(--pink);
+      margin: 0 3px;
+    }
+
+    @media (max-width: 380px) {
+      .screen {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .navigation .button {
+        min-width: 0;
+        padding: 13px 18px;
+      }
+
+      .reason {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PORTADA -->
+  <section class="screen active" id="portada">
+    <div class="content">
+      <div class="flower">✿</div>
+      <p class="eyebrow">Un día muy especial</p>
+      <h1>Felices 18,<br>mi amor</h1>
+      <p class="subtitle">
+        Hoy empieza una nueva etapa de tu vida y no sabes
+        lo orgullosa que estoy de ti.
+        Deseo que consigas todo lo que te propongas,
+        que seas muy feliz y que me dejes acompañarte
+        en muchísimos cumpleaños más.
+        Te mereces todo lo bonito del mundo.
+      </p>
+
+      <div class="date">12 · 02 · 2027</div><br><br>
+
+      <button class="button" onclick="goTo('historia')">
+        Comenzar ♡
+      </button>
+
+      <p class="footer">HECHO CON TODO MI AMOR</p>
+    </div>
+  </section>
+
+  <!-- 1. NUESTRA HISTORIA -->
+  <section class="screen" id="historia">
+    <div class="content">
+      <div class="progress" data-step="1"></div>
+      <p class="eyebrow">Capítulo uno</p>
+      <h2>Nuestra historia</h2>
+      
+      <p class="subtitle">
+        Todo empezó conociéndonos, sin saber todo lo bonito
+        que todavía nos quedaba por vivir.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Julio de 2026</div>
+          <h3>Cuando empezamos a conocernos</h3>
+          <p>El comienzo de algo que poco a poco se fue haciendo especial.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">12 de agosto de 2026</div>
+          <h3>Nuestro primer beso</h3>
+          <p>Un día que siempre voy a guardar con muchísimo cariño.</p>
+        </div>
+        <div class="counter-card">
+          <div class="counter-number" id="days-counter">0</div>
+          <div class="counter-label">días desde nuestro primer beso ♡</div>
+        </div>
+
+        <!-- Aquí podrás añadir futuros momentos importantes -->
+      </div>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('portada')">← Volver</button>
+        <button class="button" onclick="goTo('recuerdos')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. NUESTROS RECUERDOS -->
+  <section class="screen" id="recuerdos">
+    <div class="content">
+      <div class="progress" data-step="2"></div>
+      <p class="eyebrow">Capítulo dos</p>
+      <h2>Nuestros recuerdos</h2>
+      <p class="subtitle">
+        Algunas fotitos de momentos que quiero conservar
+        y poder recordar siempre.
+      </p>
+
+      <div class="photo-grid">
+        <div class="photo">
+          <img src="foto1.png" alt="Nuestro recuerdo 1">
+          <p>Un momento especial ♡</p>
+        </div>
+
+        <div class="photo">
+          <img src="foto2.jpg" alt="Nuestro recuerdo 2">
+          <p>De esos que guardo</p>
+        </div>
+
+        <div class="photo">
+          <img src="foto3.jpg" alt="Nuestro recuerdo 3">
+          <p>Contigo todo es bonito</p>
+        </div>
+
+        <div class="photo">
+          <img src="foto4.jpg" alt="Nuestro recuerdo 4">
+          <p>Otro recuerdo para siempre</p>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('historia')">← Volver</button>
+        <button class="button" onclick="goTo('razones')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 18 RAZONES -->
+  <section class="screen" id="razones">
+    <div class="content">
+      <div class="progress" data-step="3"></div>
+      <p class="eyebrow">Capítulo tres</p>
+      <h2>18 razones para quererte</h2>
+      <p class="subtitle">
+        Podría escribir muchísimas más, pero aquí tienes
+        dieciocho pequeñas razones.
+      </p>
+
+      <div class="reasons">
+        <div class="reason"><span>01</span>Por tu forma de ser.</div>
+        <div class="reason"><span>02</span>Por hacerme reír.</div>
+        <div class="reason"><span>03</span>Por tu sonrisa.</div>
+        <div class="reason"><span>04</span>Por cómo me miras.</div>
+        <div class="reason"><span>05</span>Por tus ocurrencias.</div>
+        <div class="reason"><span>06</span>Por tu sentido del humor.</div>
+        <div class="reason"><span>07</span>Por los momentos contigo.</div>
+        <div class="reason"><span>08</span>Por cómo eres conmigo.</div>
+        <div class="reason"><span>09</span>Por tus abrazos.</div>
+        <div class="reason"><span>10</span>Por tu manera de hablar.</div>
+        <div class="reason"><span>11</span>Por tus pequeños detalles.</div>
+        <div class="reason"><span>12</span>Por hacer especiales los días normales.</div>
+        <div class="reason"><span>13</span>Por tu personalidad.</div>
+        <div class="reason"><span>14</span>Por lo que me enseñas.</div>
+        <div class="reason"><span>15</span>Por cada recuerdo juntos.</div>
+        <div class="reason"><span>16</span>Por tu forma de pensar.</div>
+        <div class="reason"><span>17</span>Por ser tú.</div>
+        <div class="reason"><span>18</span>Por todo lo que nos queda.</div>
+      </div>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('recuerdos')">← Volver</button>
+        <button class="button" onclick="goTo('cosas')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SUS GUSTOS -->
+  <section class="screen" id="cosas">
+    <div class="content">
+      <div class="progress" data-step="4"></div>
+      <p class="eyebrow">Capítulo cuatro</p>
+      <h2>Las pequeñas cosas que te hacen ser tú</h2>
+      <p class="subtitle">
+        Porque también me encanta conocer esas cosas
+        que forman parte de ti.
+      </p>
+
+      <div class="interest-grid">
+        <div class="interest">
+          <div class="emoji">🍥</div>
+          <h3>Anime</h3>
+          <p>Naruto, Inazuma Eleven y todas esas historias que tanto te gustan.</p>
+        </div>
+
+        <div class="interest">
+          <div class="emoji">🥊</div>
+          <h3>Boxeo y MMA</h3>
+          <p>Tu afición por los combates y los deportes de lucha.</p>
+        </div>
+
+        <div class="interest">
+          <div class="emoji">🎮</div>
+          <h3>Videojuegos</h3>
+          <p>Esos ratitos disfrutando de tus juegos favoritos.</p>
+        </div>
+
+        <div class="interest">
+          <div class="emoji">🚗</div>
+          <h3>Coches</h3>
+          <p>Todo lo relacionado con el mundo del motor.</p>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('razones')">← Volver</button>
+        <button class="button" onclick="goTo('recordarte')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COSAS QUE QUIERO RECORDARTE -->
+  <section class="screen" id="recordarte">
+    <div class="content">
+      <div class="progress" data-step="5"></div>
+      <p class="eyebrow">Capítulo cinco</p>
+      <h2>Pequeñas cosas que quiero recordarte</h2>
+      <p class="subtitle">
+        Hay algunas cosas que quizá no te digo todos los días,
+        pero que quiero que tengas siempre presentes.
+      </p>
+
+      <div class="memory-list">
+        <details class="memory-card">
+          <summary>Una cosa que admiro de ti</summary>
+          <p>Tu forma de ser y todas esas pequeñas cosas que te hacen una persona especial.</p>
+        </details>
+
+        <details class="memory-card">
+          <summary>Algo que me encanta de nosotros</summary>
+          <p>La manera en la que podemos crear recuerdos y compartir momentos que son solo nuestros.</p>
+        </details>
+
+        <details class="memory-card">
+          <summary>Algo que deseo para tu futuro</summary>
+          <p>Que consigas todo aquello que te propongas, que seas feliz y que nunca dejes de perseguir tus sueños.</p>
+        </details>
+
+        <details class="memory-card">
+          <summary>Un recuerdo que siempre guardaré</summary>
+          <p>Nuestro primer beso, aquel 12 de agosto. Un día que siempre tendrá un lugar especial para mí.</p>
+        </details>
+
+        <details class="memory-card">
+          <summary>Una promesa que quiero hacerte</summary>
+          <p>Seguir cuidando los pequeños detalles y valorar cada momento bonito que compartamos.</p>
+        </details>
+      </div>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('cosas')">← Volver</button>
+        <button class="button" onclick="goTo('carta')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CARTA FINAL -->
+  <section class="screen" id="carta">
+    <div class="content">
+      <div class="progress" data-step="6"></div>
+      <p class="eyebrow">El último capítulo</p>
+      <h2>Mi carta para ti</h2>
+      <p class="subtitle">
+        Y para terminar, unas palabras que quiero dedicarte.
+      </p>
+
+      <div class="letter">
+        <p id="letter-text"></p>
+      </div>
+
+      <div class="flower">✿ ♡ ✿</div>
+
+      <p class="subtitle">
+        Espero que disfrutes de tus 18 y que esta nueva etapa
+        venga llena de momentos preciosos.
+      </p>
+
+      <div class="navigation">
+        <button class="button secondary" onclick="goTo('recordarte')">← Volver</button>
+        <button class="button" onclick="goTo('final')">Terminar ♡</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="screen" id="final">
+    <div class="content">
+      <div class="flower">♡ ✿ ♡</div>
+      <p class="eyebrow">Y esto es solo el principio</p>
+      <h1>Felices 18,<br>mi amor</h1>
+      <p class="subtitle">
+        Gracias por formar parte de tantos recuerdos bonitos.
+        Ojalá nos queden muchísimos más por crear.
+      </p>
+
+      <div class="date">12 · 02 · 2027</div>
+
+      <p class="footer">
+        Hecho especialmente para ti ♡
+        <strong>Con muchísimo amor,</strong>
+        Iris
+        <br>
+        FELICES 18 · SIEMPRE TÚ Y YO 🌸
+      </p>
+
+      <button class="button secondary" onclick="goTo('portada')" style="margin-top:25px">
+        Volver al principio
+      </button>
+    </div>
+  </section>
+
+  <script>
+    const pages = [
+      "portada",
+      "historia",
+      "recuerdos",
+      "razones",
+      "cosas",
+      "recordarte",
+      "carta",
+      "final"
+    ];
+
+    function goTo(pageId) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+
+      const nextPage = document.getElementById(pageId);
+
+      if (nextPage) {
+        nextPage.classList.add("active");
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    }
+
+    // Contador desde nuestro primer beso: 12 de agosto de 2026.
+    function updateCounter() {
+      const firstKiss = new Date(2026, 7, 12);
+      const today = new Date();
+
+      firstKiss.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      const difference = Math.floor(
+        (today - firstKiss) / (1000 * 60 * 60 * 24)
+      );
+
+      document.getElementById("days-counter").textContent =
+        Math.max(0, difference);
+    }
+
+    updateCounter();
+
+    // Indicador de progreso de los apartados.
+    document.querySelectorAll(".progress").forEach(progress => {
+      const currentStep = Number(progress.dataset.step);
+
+      for (let i = 1; i <= 6; i++) {
+        const dot = document.createElement("span");
+
+        if (i === currentStep) {
+          dot.classList.add("current");
+        }
+
+        progress.appendChild(dot);
+      }
+    });
+  </script>
+
+</body>
+</html>
